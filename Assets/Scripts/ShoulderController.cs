@@ -23,6 +23,9 @@ public class ShoulderController : MonoBehaviour
     private float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f;
 
+    public GameObject normalCamera;
+    public GameObject aimCamera;
+
     //variables para sensor
 
     [SerializeField] private Transform _sensorPosition;
@@ -48,6 +51,17 @@ public class ShoulderController : MonoBehaviour
 
         Movement();
         Jump();
+
+        if(Input.GetButton("Fire2"))
+        {
+            normalCamera.SetActive(false);
+            aimCamera.SetActive(true);
+        }
+        else
+        {
+            normalCamera.SetActive(true);
+            aimCamera.SetActive(false);
+        }
     }
 
     void Jump()
