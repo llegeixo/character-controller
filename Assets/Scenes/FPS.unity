@@ -737,7 +737,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -1163,6 +1163,12 @@ MonoBehaviour:
   _speed: 5
   _sensitivity: 200
   _jumpHeight: 2
+  _gravity: -9.81
+  _sensorPosition: {fileID: 1687011511}
+  _sensorRadius: 0.2
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1687011510
 GameObject:
   m_ObjectHideFlags: 0
