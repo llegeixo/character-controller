@@ -60,6 +60,7 @@ public class TPS_controller : MonoBehaviour
         
         _animator.SetFloat("VelX", 0);
         _animator.SetFloat("VelZ", direction.magnitude);
+        _animator.SetBool("IsRunning", true);
 
 
         if(direction != Vector3.zero)
@@ -109,7 +110,9 @@ public class TPS_controller : MonoBehaviour
         if(_isGrounded && Input.GetButtonDown("Jump"))
         {
             _playerGravity.y = Mathf.Sqrt(_jumpHeight * -2 * _gravity);
+            _animator.SetBool("IsJumping", true);
         }
+    
 
         _playerGravity.y += _gravity * Time.deltaTime;
 
