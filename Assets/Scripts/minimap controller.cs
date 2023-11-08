@@ -6,6 +6,9 @@ public class minimapcontroller : MonoBehaviour
 {
     public GameObject _target;
     public Vector3 _cameraOffset;
+
+    public GameObject _mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,13 @@ public class minimapcontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = _target.transform.position + _cameraOffset;
-        this.transform.eulerAngles = new Vector3(0, _target.eulerAngles.y, 0);
+        transform.position = new Vector3 (_target.transform.position.x, _target.transform.position.y + 86, _target.transform.position.z); 
+        transform.rotation = Quaternion.Euler(90, _mainCamera.transform.localRotation.eulerAngles.y, 0);
+    }
+
+    void Awake()
+    {
+        _target = GameObject.Find("Player");
+        _mainCamera = GameObject.Find("Main Camera");
     }
 }
