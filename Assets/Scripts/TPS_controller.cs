@@ -10,6 +10,8 @@ public class TPS_controller : MonoBehaviour
     private float _vertical;
     private Animator _animator;
 
+    public int _shootDamage;
+
     [SerializeField] private float playerSpeed = 5;
     [SerializeField] private float _jumpHeight = 1;
 
@@ -53,7 +55,10 @@ public class TPS_controller : MonoBehaviour
 
         Jump();
 
-        RayTest();
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            RayTest();
+        }
     }
 
     void Movement ()
@@ -102,10 +107,11 @@ public class TPS_controller : MonoBehaviour
     void Jump()
     {
         
-        //_isGrounded = Physics.CheckSphere(_sensorPosition.position, _sensorRadius, _groundLayer);
+        _isGrounded = Physics.CheckSphere(_sensorPosition.position, _sensorRadius, _groundLayer);
 
-        _isGrounded = Physics.Raycast(_sensorPosition.position, Vector3.down, _sensorRadius, _groundLayer);
+        /*_isGrounded = Physics.Raycast(_sensorPosition.position, Vector3.down, _sensorRadius, _groundLayer);
         Debug.DrawRay(_sensorPosition.position, Vector3.down* _sensorRadius, Color.red);
+        ground sensor versión raycast*/
         
         if(_isGrounded && _playerGravity.y < 0)
         {
@@ -137,7 +143,20 @@ public class TPS_controller : MonoBehaviour
             Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
         }*/
 
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 10))
+        {
+            Debug.Log(hit.transform.name);
+            Debug.Log(hit.transform.position);
+            //Destroy(hit.transform.gameObject);
 
+            Box caja = hit.transform.GetComponent<Box>();
+
+            if(caja != null)
+            {
+                caja.TakeDamage(_shootDamage);
+            }
 
     }
+}
 }
