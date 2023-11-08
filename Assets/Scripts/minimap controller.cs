@@ -16,6 +16,6 @@ public class minimapcontroller : MonoBehaviour
     void Update()
     {
         this.transform.position = _target.transform.position + _cameraOffset;
-        this.transform.eulerAngles = new Vector3(0, _target.eulerAngles.y, 0);
+        //transform.eulerAngles = new Vector3(0, _target.eulerAngles.y, 0);
     }
 }

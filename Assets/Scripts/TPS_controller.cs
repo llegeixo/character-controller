@@ -52,6 +52,8 @@ public class TPS_controller : MonoBehaviour
         }
 
         Jump();
+
+        RayTest();
     }
 
     void Movement ()
@@ -100,11 +102,14 @@ public class TPS_controller : MonoBehaviour
     void Jump()
     {
         
-        _isGrounded = Physics.CheckSphere(_sensorPosition.position, _sensorRadius, _groundLayer);
+        //_isGrounded = Physics.CheckSphere(_sensorPosition.position, _sensorRadius, _groundLayer);
+
+        _isGrounded = Physics.Raycast(_sensorPosition.position, Vector3.down, _sensorRadius, _groundLayer);
+        Debug.DrawRay(_sensorPosition.position, Vector3.down* _sensorRadius, Color.red);
         
         if(_isGrounded && _playerGravity.y < 0)
         {
-            _playerGravity.y = 0;
+            _playerGravity.y = -2;
         }
         
         if(_isGrounded && Input.GetButtonDown("Jump"))
@@ -117,5 +122,22 @@ public class TPS_controller : MonoBehaviour
         _playerGravity.y += _gravity * Time.deltaTime;
 
         _controller.Move(_playerGravity * Time.deltaTime);
+    }
+
+    void RayTest()
+    {
+        /* Raycast simple
+        if(Physics.Raycast(transform.position, transform.forward, 10))
+        {
+            Debug.Log("Hit");
+            Debug.DrawRay(transform.position, transform.forward * 10, Color.green);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+        }*/
+
+
+
     }
 }
