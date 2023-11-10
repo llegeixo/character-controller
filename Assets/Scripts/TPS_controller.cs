@@ -32,12 +32,15 @@ public class TPS_controller : MonoBehaviour
 
     private bool _playerLive = true;
 
+    TPS_controller _desactivateScript;
+
     // Start is called before the first frame update
     void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _camera = Camera.main.transform;
         _animator = GetComponentInChildren<Animator>();
+        _desactivateScript = GetComponent<TPS_controller>();
     }
 
     // Update is called once per frame
@@ -47,19 +50,19 @@ public class TPS_controller : MonoBehaviour
         _vertical = Input.GetAxisRaw("Vertical");
 
         
-        if(Input.GetButton("Fire2") && _playerLive == true)
+        if(Input.GetButton("Fire2")) //&& _playerLive == true)
         {
             AimMovement();
         }
-        else if (_playerLive == true)
+        else  //(_playerLive == true)
         {
             Movement();
         }
 
-        
-        if(_playerLive == true)
+        Jump();
+        //if(_playerLive == true)
         {
-            Jump();
+            
         }
 
         if(Input.GetKeyDown(KeyCode.K))
@@ -172,7 +175,8 @@ public class TPS_controller : MonoBehaviour
         if(other.CompareTag("DeadZone"))
         {
            _animator.Play("death"); 
-           _playerLive = false;
+           //_playerLive = false;
+           _desactivateScript.enabled=false;
         }
         
     }
